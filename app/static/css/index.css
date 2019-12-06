@@ -1,0 +1,87 @@
+html,body{
+    overflow: hidden;
+}
+.container{
+    height: 100%;
+}
+.menu{
+    position: absolute;
+    left: 0;
+    width: 12%;
+    height: 100%;
+    text-align: center;
+    background-color: rgba(246, 153, 65,0.6);
+    background-image: url("../img/nav3.jpg");
+    background-repeat: no-repeat;
+    background-position: 50% 50%;
+    background-size: 650%;
+}
+.menu a{
+    color: #FFF;
+}
+.menu a:hover{
+    color: #f69941;;
+}
+.navbar{
+    background: rgba(246, 153, 65,0.3);
+    border-color: rgba(246, 153, 65,0.3);
+}
+.nav-pills>li.active>a, .nav-pills>li.active>a:focus, .nav-pills>li.active>a:hover{
+    color: #fff;
+    background-color: #f19e78;
+}
+.menu i{
+    color: #FFF;
+}
+.rightBox{
+    position: absolute;
+    width: 88%;
+    height: 100%;
+    left: 12%;
+    overflow: auto;
+}
+.headTitle{
+    line-height: 70px;
+}
+.userBtn{
+    position: absolute;
+    right: 0;
+    margin-right: 30px;
+    margin-top: -50px;
+}
+.master{
+    height:920px;
+    background: #ececec;
+    overflow: hidden;
+}
+.panel{
+    margin-bottom: 0;
+}
+.importPage{
+    overflow: hidden;
+}
+.bottomInfo{
+    text-align: center;
+    margin-bottom: 0;
+    background: #fff;
+}
+.logo{
+    background-image: url(../img/girl.jpg);
+    background-repeat: no-repeat;
+    background-position: 25% 0;
+    background-size: 110%;
+    display: inline-block;
+    height: 90px;
+    width: 90px;
+    border-radius: 60%;
+}
+.panel-primary{
+    border-color: #777;
+}
+.panel-primary h3{
+    color: #777;
+}
+.panel-primary>.panel-heading{
+    background: #FFF;
+    border-color: #CCC;
+}

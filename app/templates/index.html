@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>httpTest_platform</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="{{ url_for('static',filename='/lib/bootstrap/css/bootstrap.min.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static',filename='/css/index.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static',filename='/css/page.css') }}">
+</head>
+<body>
+    <div class="container">
+        <div class="menu">
+            <h1><i class="logo"></i></h1>
+            <i>API自动化测试平台</i>
+            <nav class="navbar navbar-inverse" role="navigation">
+                <div>
+                    <ul class="nav nav-pills nav-stacked">
+                        <li class="active" index="1"><a href="#">首页</a></li>
+                        <li index="2"><a href="#">产品管理</a></li>
+                        <li index="3"><a href="#">项目管理</a></li>
+                        <li index="4"><a href="#">模块管理</a></li>
+                        <li index="5"><a href="#">用例管理</a></li>
+                        <li index="6"><a href="#">测试报告</a></li>
+                        <li index="7"><a href="#">公共配置</a></li>
+                    </ul>
+                </div>
+            </nav>
+        </div>
+        <div class="rightBox">
+           <div class="panel panel-primary master">
+                <div class="panel-heading">
+                    <h3 class="title panel-title headTitle">首页</h3>
+                    <button type="button" class="userBtn btn btn-default btn-ms">
+                        <span class="glyphicon glyphicon-user"></span> User
+                    </button>
+                </div>
+                <div class="panel-body importPage">
+                
+                </div>
+            </div>
+            <div>
+                <ol class="breadcrumb bottomInfo">
+                    <li class="active"></li>
+                </ol>
+            </div>
+        </div>
+    </div>
+
+    <!-- 插入jquery -->
+    <script src="{{ url_for('static',filename='/lib/jquery-1.11.1.js') }}"></script>
+    <script src="{{ url_for('static',filename='/lib/bootstrap/js/bootstrap.min.js') }}"></script>
+    <script src="{{ url_for('static',filename='/lib/bootstrap/js/bootstrapValidator.js') }}"></script>
+    <link href="{{ url_for('static',filename='/lib/bootstrap/css/bootstrapValidator.min.css') }}" rel="stylesheet" />
+    <script src="{{ url_for('static',filename='/lib/FileSaver.js') }}"></script>
+    <script src="{{ url_for('static',filename='/lib/layer/layer.js') }}"></script>
+    <script>
+        (function init(){
+            var pageNav = [
+                "/dashboard",
+                "/product",
+                "/project",
+                "/modules",
+                "/testcass",
+                "/report",
+                "/config"
+            ]
+
+            $.get(pageNav[0],function(data){
+                $(".importPage").html(data);
+            })
+            
+            $(".nav li").on("click",function(){
+                if($(this).attr("class") != "active"){
+                    $(this).addClass("active");
+                    $(this).siblings().removeClass("active");
+                    let showTitle = $(this).text();
+                    $(".title").text(showTitle);
+                    
+                    let index = parseInt($(this).attr("index"))-1;
+                    let url;
+                    
+                    for(let i of pageNav){
+                        if(i == pageNav[index]){
+                            url = i;
+                        } 
+                    }
+                    
+                    $.get(url,function(data){
+                        $(".importPage").html(data);
+                    })
+                }
+            });
+            
+            
+        })();
+    </script>
+</body>

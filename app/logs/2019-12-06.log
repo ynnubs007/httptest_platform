@@ -1,0 +1,98 @@
+[2019-12-06 12:03:15] [INFO]: 开始执行测试用例[test接口测试用例]
+[2019-12-06 12:03:15] [INFO]: 接口请求地址为 --> http://127.0.0.1:2333/test
+[2019-12-06 12:03:15] [INFO]: 接口请求方法为 --> POST
+[2019-12-06 12:03:15] [INFO]: 接口请求header --> {'Content-Type': 'application/json'}
+[2019-12-06 12:03:15] [INFO]: 接口请求数据为 --> {'aaa': 'bbb'}
+[2019-12-06 12:03:15] [INFO]: 接口响应时间为 --> 0.017083s
+[2019-12-06 12:03:15] [INFO]: 接口响应状态为 --> 200
+[2019-12-06 12:03:15] [INFO]: 接口响应内容为 --> {
+  "aaa": "bbb"
+}
+
+[2019-12-06 12:03:15] [INFO]: 测试用例[test接口测试用例]检查点执行成功,检查点信息为 --> r.json()==request["json"]
+[2019-12-06 12:03:15] [INFO]: 测试用例[test接口测试用例]检查点执行成功,检查点信息为 --> r.status_code==200
+[2019-12-06 12:03:15] [INFO]: ******************************************************************************************
+[2019-12-06 12:03:15] [INFO]: 共计[1]条测试用例执行完成！
+[2019-12-06 12:03:15] [INFO]: ******************************************************************************************
+[2019-12-06 12:03:24] [INFO]: 开始执行测试用例[接口测试用例1]
+[2019-12-06 12:03:24] [INFO]: 接口请求地址为 --> http://127.0.0.1:2333/login
+[2019-12-06 12:03:24] [INFO]: 接口请求方法为 --> POST
+[2019-12-06 12:03:24] [INFO]: 接口请求header --> {'Content-Type': 'application/json'}
+[2019-12-06 12:03:24] [INFO]: 接口请求数据为 --> {'password': '123456', 'username': 'admin'}
+[2019-12-06 12:03:24] [INFO]: 接口响应时间为 --> 0.009156s
+[2019-12-06 12:03:24] [INFO]: 接口响应状态为 --> 200
+[2019-12-06 12:03:24] [INFO]: 接口响应内容为 --> {
+  "code": 200, 
+  "data": "sjdh34gsalked23nlsakn45dudaj", 
+  "msg": "\u767b\u9646\u6210\u529f"
+}
+
+[2019-12-06 12:03:24] [INFO]: 测试用例[接口测试用例1]检查点执行成功,检查点信息为 --> r.status_code==200
+[2019-12-06 12:03:24] [INFO]: ******************************************************************************************
+[2019-12-06 12:03:24] [INFO]: 共计[1]条测试用例执行完成！
+[2019-12-06 12:03:24] [INFO]: ******************************************************************************************
+[2019-12-06 16:34:37] [ERROR]: sql语句[SELECT COUNT(*)casenum FROM t_testcass]执行失败,错误信息为 --> [Errno 22] Invalid argument
+[2019-12-06 16:34:37] [ERROR]: sql语句[SELECT        t_testcass.id as testid,        (SELECT modules FROM t_modules WHERE id = t_testcass.moduleid) as modulename,        (SELECT COUNT(*) FROM t_testcass ) as casenum,        t_testcass.testname,        t_testcass.explain,        t_testcass.request,        t_testcass.validate,        t_testcass.extract,        t_testcass.createtime,        t_testcass.testtype    FROM        t_testcass    LEFT JOIN t_modules ON t_testcass.moduleid = t_modules.id    limit 0, 8;]执行失败,错误信息为 --> [Errno 22] Invalid argument
+[2019-12-06 16:34:37] [ERROR]: sql语句[SELECT        t_modules.id as moduleid,        t_modules.modules,        t_modules.`explain`,        (SELECT COUNT(*) FROM t_testcass WHERE t_testcass.moduleid = t_modules.id) AS cassnum,        t_modules.leader,        t_modules.remark,        t_modules.createtime,        t_modules.updatatime    FROM        t_modules    LEFT JOIN t_testcass ON t_modules.id = t_testcass.moduleid    group by t_modules.id;]执行失败,错误信息为 --> [Errno 22] Invalid argument
+[2019-12-06 16:34:54] [ERROR]: sql语句[SELECT COUNT(*)casenum FROM t_testcass]执行失败,错误信息为 --> [Errno 22] Invalid argument
+[2019-12-06 16:34:54] [ERROR]: sql语句[SELECT        t_modules.id as moduleid,        t_modules.modules,        t_modules.`explain`,        (SELECT COUNT(*) FROM t_testcass WHERE t_testcass.moduleid = t_modules.id) AS cassnum,        t_modules.leader,        t_modules.remark,        t_modules.createtime,        t_modules.updatatime    FROM        t_modules    LEFT JOIN t_testcass ON t_modules.id = t_testcass.moduleid    group by t_modules.id;]执行失败,错误信息为 --> [Errno 22] Invalid argument
+[2019-12-06 16:34:55] [ERROR]: sql语句[SELECT        t_testcass.id as testid,        (SELECT modules FROM t_modules WHERE id = t_testcass.moduleid) as modulename,        (SELECT COUNT(*) FROM t_testcass ) as casenum,        t_testcass.testname,        t_testcass.explain,        t_testcass.request,        t_testcass.validate,        t_testcass.extract,        t_testcass.createtime,        t_testcass.testtype    FROM        t_testcass    LEFT JOIN t_modules ON t_testcass.moduleid = t_modules.id    limit 0, 8;]执行失败,错误信息为 --> [Errno 22] Invalid argument
+[2019-12-06 16:34:55] [ERROR]: sql语句[SELECT        t_modules.id as moduleid,        t_modules.modules,        t_modules.`explain`,        (SELECT COUNT(*) FROM t_testcass WHERE t_testcass.moduleid = t_modules.id) AS cassnum,        t_modules.leader,        t_modules.remark,        t_modules.createtime,        t_modules.updatatime    FROM        t_modules    LEFT JOIN t_testcass ON t_modules.id = t_testcass.moduleid    group by t_modules.id;]执行失败,错误信息为 --> [Errno 22] Invalid argument
+[2019-12-06 16:36:42] [ERROR]: sql语句[SELECT COUNT(*)casenum FROM t_testcass]执行失败,错误信息为 --> [Errno 22] Invalid argument
+[2019-12-06 16:36:42] [ERROR]: sql语句[SELECT        t_testcass.id as testid,        (SELECT modules FROM t_modules WHERE id = t_testcass.moduleid) as modulename,        (SELECT COUNT(*) FROM t_testcass ) as casenum,        t_testcass.testname,        t_testcass.explain,        t_testcass.request,        t_testcass.validate,        t_testcass.extract,        t_testcass.createtime,        t_testcass.testtype    FROM        t_testcass    LEFT JOIN t_modules ON t_testcass.moduleid = t_modules.id    limit 0, 8;]执行失败,错误信息为 --> [Errno 22] Invalid argument
+[2019-12-06 16:36:42] [ERROR]: sql语句[SELECT        t_modules.id as moduleid,        t_modules.modules,        t_modules.`explain`,        (SELECT COUNT(*) FROM t_testcass WHERE t_testcass.moduleid = t_modules.id) AS cassnum,        t_modules.leader,        t_modules.remark,        t_modules.createtime,        t_modules.updatatime    FROM        t_modules    LEFT JOIN t_testcass ON t_modules.id = t_testcass.moduleid    group by t_modules.id;]执行失败,错误信息为 --> [Errno 22] Invalid argument
+[2019-12-06 16:37:01] [ERROR]: sql语句[SELECT COUNT(*)reportnum FROM t_reports]执行失败,错误信息为 --> [Errno 22] Invalid argument
+[2019-12-06 16:37:02] [ERROR]: sql语句[select             t_reports.cassid,           case status when 0 then 'Pass' when 1 then 'Fail' else 'Error' end as status,           t_reports.runtime,           t_reports.result,           t_reports.validate,           t_reports.createtime,           t_testcass.testname,           (SELECT COUNT(*) FROM t_reports) as reportnum           from t_testcass INNER JOIN t_reports           on t_testcass.id=t_reports.cassid            order by createtime desc            limit 0, 8]执行失败,错误信息为 --> [Errno 22] Invalid argument
+[2019-12-06 16:37:02] [ERROR]: sql语句[select          case status when 0 then 'Pass' when 1 then 'Fail' else 'Error' end as status,         count(status) as nums          from t_reports          GROUP BY status]执行失败,错误信息为 --> [Errno 22] Invalid argument
+[2019-12-06 16:37:51] [ERROR]: sql语句[SELECT            t_product.id as productid,            t_product.product,            t_product.`explain`,            (SELECT COUNT(*) FROM t_project WHERE t_project.productid = t_product.id) AS jectnum,            (SELECT COUNT(*) FROM t_modules WHERE t_modules.projectid = t_project.id) AS modulenum,            t_product.leader,            t_product.remark,            t_product.createtime,            t_product.updatatime        FROM            t_product        LEFT JOIN t_project ON t_product.id = t_project.productid        LEFT JOIN t_modules ON t_project.id = t_modules.projectid        -- LEFT JOIN t_testcass ON t_modules.id = t_testcass.moduleid        group by t_product.id]执行失败,错误信息为 --> [Errno 22] Invalid argument
+[2019-12-06 16:37:53] [ERROR]: sql语句[SELECT        t_project.id as projectid,        t_project.project,        t_project.`explain`,        (SELECT COUNT(*) FROM t_modules WHERE t_modules.projectid = t_project.id) AS modulenum,        (SELECT COUNT(*) FROM t_testcass WHERE t_testcass.moduleid = t_modules.id) AS cassnum,        t_project.leader,        t_project.remark,        t_project.createtime,        t_project.updatatime    FROM        t_project    LEFT JOIN t_modules ON t_project.id = t_modules.projectid    LEFT JOIN t_testcass ON t_modules.id = t_testcass.moduleid    group by t_project.id;]执行失败,错误信息为 --> [Errno 22] Invalid argument
+[2019-12-06 16:37:54] [ERROR]: sql语句[SELECT        t_modules.id as moduleid,        t_modules.modules,        t_modules.`explain`,        (SELECT COUNT(*) FROM t_testcass WHERE t_testcass.moduleid = t_modules.id) AS cassnum,        t_modules.leader,        t_modules.remark,        t_modules.createtime,        t_modules.updatatime    FROM        t_modules    LEFT JOIN t_testcass ON t_modules.id = t_testcass.moduleid    group by t_modules.id;]执行失败,错误信息为 --> [Errno 22] Invalid argument
+[2019-12-06 16:37:55] [ERROR]: sql语句[SELECT COUNT(*)casenum FROM t_testcass]执行失败,错误信息为 --> [Errno 22] Invalid argument
+[2019-12-06 16:37:55] [ERROR]: sql语句[SELECT        t_testcass.id as testid,        (SELECT modules FROM t_modules WHERE id = t_testcass.moduleid) as modulename,        (SELECT COUNT(*) FROM t_testcass ) as casenum,        t_testcass.testname,        t_testcass.explain,        t_testcass.request,        t_testcass.validate,        t_testcass.extract,        t_testcass.createtime,        t_testcass.testtype    FROM        t_testcass    LEFT JOIN t_modules ON t_testcass.moduleid = t_modules.id    limit 0, 8;]执行失败,错误信息为 --> [Errno 22] Invalid argument
+[2019-12-06 16:37:55] [ERROR]: sql语句[SELECT        t_modules.id as moduleid,        t_modules.modules,        t_modules.`explain`,        (SELECT COUNT(*) FROM t_testcass WHERE t_testcass.moduleid = t_modules.id) AS cassnum,        t_modules.leader,        t_modules.remark,        t_modules.createtime,        t_modules.updatatime    FROM        t_modules    LEFT JOIN t_testcass ON t_modules.id = t_testcass.moduleid    group by t_modules.id;]执行失败,错误信息为 --> [Errno 22] Invalid argument
+[2019-12-06 16:52:14] [ERROR]: sql语句[insert into t_testcass             (`moduleid`, `testname`, `testtype`, `explain`,             `request`, `validate`, `extract`)             values('1','test2','testsuite','测试提取json','{"url":"http://localhost:2333/login","method":"POST","headers":{"User-Agent":"HTTPie/1.0.3","Content-Type":"application/json"},"json":{"username":"admin","password":"123456"}}','[{"Equal":["r.status_code","200"]}]','');            ]执行失败,错误信息为 --> (3140, 'Invalid JSON text: "The document is empty." at position 0 in value for column \'t_testcass.extract\'.')
+[2019-12-06 16:53:48] [ERROR]: sql语句[insert into t_testcass             (`moduleid`, `testname`, `testtype`, `explain`,             `request`, `validate`, `extract`)             values('1','测试','testcass','防守打法','{"url":"http://localhost:2333/login","method":"POST","headers":{"User-Agent":"HTTPie/1.0.3","Content-Type":"application/json"},"json":{"username":"admin","password":"123456"}}','[{"Equal":["r.status_code","200"]}]','手动阀 ');            ]执行失败,错误信息为 --> (3140, 'Invalid JSON text: "Invalid value." at position 0 in value for column \'t_testcass.extract\'.')
+[2019-12-06 17:04:05] [INFO]: 开始执行测试用例[测试]
+[2019-12-06 17:04:05] [INFO]: 接口请求地址为 --> http://localhost:2333/login
+[2019-12-06 17:04:05] [INFO]: 接口请求方法为 --> POST
+[2019-12-06 17:04:05] [INFO]: 接口请求header --> {'User-Agent': 'HTTPie/1.0.3', 'Content-Type': 'application/json'}
+[2019-12-06 17:04:05] [INFO]: 接口请求数据为 --> {'password': '123456', 'username': 'admin'}
+[2019-12-06 17:04:07] [ERROR]: 测试用例[测试]在执行过程中出现异常，错误信息为 --> HTTPConnectionPool(host='localhost', port=2333): Max retries exceeded with url: /login (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x0000000003BF9D30>: Failed to establish a new connection: [WinError 10061] 由于目标计算机积极拒绝，无法连接。',))
+[2019-12-06 17:04:07] [ERROR]: 测试用例[测试]在执行过程中出现异常，错误信息为 --> local variable 'r' referenced before assignment
+[2019-12-06 17:04:07] [INFO]: ******************************************************************************************
+[2019-12-06 17:04:07] [INFO]: 共计[1]条测试用例执行完成！
+[2019-12-06 17:04:07] [INFO]: ******************************************************************************************
+[2019-12-06 17:05:12] [INFO]: 开始执行测试用例[测试]
+[2019-12-06 17:05:12] [INFO]: 接口请求地址为 --> http://localhost:2333/login
+[2019-12-06 17:05:12] [INFO]: 接口请求方法为 --> POST
+[2019-12-06 17:05:12] [INFO]: 接口请求header --> {'User-Agent': 'HTTPie/1.0.3', 'Content-Type': 'application/json'}
+[2019-12-06 17:05:12] [INFO]: 接口请求数据为 --> {'password': '123456', 'username': 'admin'}
+[2019-12-06 17:05:13] [INFO]: 接口响应时间为 --> 1.013865s
+[2019-12-06 17:05:13] [INFO]: 接口响应状态为 --> 200
+[2019-12-06 17:05:13] [INFO]: 接口响应内容为 --> {
+  "code": 200, 
+  "data": "sjdh34gsalked23nlsakn45dudaj", 
+  "msg": "\u767b\u9646\u6210\u529f"
+}
+
+[2019-12-06 17:05:13] [INFO]: 测试用例[测试]检查点执行成功,检查点信息为 --> r.status_code==200
+[2019-12-06 17:05:13] [INFO]: ******************************************************************************************
+[2019-12-06 17:05:13] [INFO]: 共计[1]条测试用例执行完成！
+[2019-12-06 17:05:13] [INFO]: ******************************************************************************************
+[2019-12-06 17:08:42] [INFO]: 开始执行测试用例[测试]
+[2019-12-06 17:08:42] [INFO]: 接口请求地址为 --> http://localhost:2333/login
+[2019-12-06 17:08:42] [INFO]: 接口请求方法为 --> POST
+[2019-12-06 17:08:42] [INFO]: 接口请求header --> {'User-Agent': 'HTTPie/1.0.3', 'Content-Type': 'application/json'}
+[2019-12-06 17:08:42] [INFO]: 接口请求数据为 --> {'password': '123456', 'username': 'admin'}
+[2019-12-06 17:08:43] [INFO]: 接口响应时间为 --> 1.005683s
+[2019-12-06 17:08:43] [INFO]: 接口响应状态为 --> 200
+[2019-12-06 17:08:43] [INFO]: 接口响应内容为 --> {
+  "code": 200, 
+  "data": "sjdh34gsalked23nlsakn45dudaj", 
+  "msg": "\u767b\u9646\u6210\u529f"
+}
+
+[2019-12-06 17:08:43] [INFO]: 测试用例[测试]检查点执行成功,检查点信息为 --> r.status_code==200
+[2019-12-06 17:08:43] [INFO]: ******************************************************************************************
+[2019-12-06 17:08:43] [INFO]: 共计[1]条测试用例执行完成！
+[2019-12-06 17:08:43] [INFO]: ******************************************************************************************

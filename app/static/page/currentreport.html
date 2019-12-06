@@ -1,0 +1,45 @@
+﻿<table border="1" cellspacing="0" cellpadding="5" width="100%" align="center">
+    <thead>
+            <tr height="40" bgcolor="darkseagreen">
+              <td width="7%">用例编号</td>
+              <td width="7%">用例名称</td>
+              <td width="10%">接口响应:</td>
+              <td width="9%">接口校验:</td>
+              <td width="20%">响应时间:</td>
+              <td width="7%">执行时间:</td>
+              <td width="7%">测试结果:</td>
+              <td width="7%">操作</td>
+             </tr>
+             测试详情:
+     <thead>
+
+     <tbody>
+
+     </tbody>
+</table>
+<script>
+    (function page2Init(){
+        $.get("/querycurrentreport",function(data){
+            $("table tbody").html(" ");
+            if(data&&data.code == 200){
+                for(let i of data.data){
+                    let cassid = i.cassid;
+                    let testname = i.testname;
+                    let result= i.result;
+                    let validate= i.validate;
+                    let status = i.status;
+                    let runtime = i.runtime;
+                    let createtime= i.createtime;
+                    let reportnum= i.reportnum;
+                    let tr = $("<tr><td>"+cassid+"</td><td>"+testname+"</td><td>"+result+"</td><td>"+validate+"</td><td>"+runtime+"</td><td>"+createtime+"</td><td>"+status+"</td></tr>");
+
+                    $("table tbody").append(tr);
+                }
+            }
+        });
+
+
+    })();
+
+
+</script>

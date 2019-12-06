@@ -1,0 +1,523 @@
+<style type="text/css">
+    .myModal-header{
+	padding:6px 10px 6px 20px;
+	background-color:#007DCF;
+	border:0px;
+	height:30px;
+}
+
+.myModal-body{
+	padding:30px 40px 30px 40px;
+	background-color:#1E253F;
+	border-left:1px solid #007DCF;
+	border-right:1px solid #007DCF;
+}
+
+.myModal-header-font{
+	font-size:12px;
+	color:#FFFFFF;
+}
+
+.myModal-header-close{
+	color:white;
+}
+
+.myModal-select{
+	appearance:none;
+	-moz-appearance:none;
+	-webkit-appearance:none;
+	padding-right:10px;
+	background-position-x: 185px;
+}
+
+.myModal-input{
+	background-color:#1E253F;
+	border:1px solid #007DCF
+}
+
+.myModal-footer{
+	background-color:#1E253F;
+	border:1px solid #007DCF;
+	border-top:none;
+	padding:0px 15px 30px 15px;
+}
+.myModal-textare{
+    width:100%;
+    height:500px
+}
+.table thead tr th, .table tbody tr td {
+    vertical-align: middle;
+    text-align: center;
+    white-space: nowrap;/*规定段落的文本不进行换行*/
+    overflow: hidden;/*超出隐藏*/
+    text-overflow: ellipsis;/*隐藏的字符用省略号表示  IE*/
+    -moz-text-overflow: ellipsis;/*隐藏的字符用省略号表示  火狐*/
+}
+
+table {
+    table-layout:fixed;/*table的内部布局固定大小，才可以通过td的width控制宽度*/
+    word-wrap:break-word; /*允许长单词换到下一行*/
+}
+.table td:hover { /* 鼠标滑过  显示隐藏的内容  伴有横向的滚动条 */
+   overflow:auto;
+   text-overflow:clip;
+}
+</style>
+<div class="content page2">
+    <!---bootstrap警告框--->
+    <div id="mySuccess" class="alert alert-success">
+         <a href="#" class="close" data-dismiss="alert">&times;</a>
+    </div>
+    <div id="myDanger" class="alert aalert-danger">
+         <a href="#" class="close" data-dismiss="alert">&times;</a>
+    </div>
+    <div class="projectManager table-responsive " style="overflow: auto;max-height:900px;">
+        <button class="btn btn-primary btn-mini" data-toggle="modal" data-target="#myModal">
+            <span class="glyphicon glyphicon-plus">新增</span>
+        </button>
+        <!-- 模态框（Modal） -->
+        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	     <div class="modal-dialog">
+		    <div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+					&times;
+				</button>
+				<h4 class="modal-title" id="myModalLabel myModal-body">
+					<label>用例新增</label>
+				</h4>
+			</div>
+			<div class="modal-body">
+                <form id="ff" method="post">
+                     <div class="form-group">
+                         <label >用例名称:</label>
+                         <input type="text" id="testname" name="testname" class="form-control myModal-input myModal-header-font" placeholder="请输入用例名称">
+
+                     </div>
+                    <div class="form-group">
+                          <label >模块编号</label>
+                          <select  id="moduleid"  class="form-control myModal-input myModal-header-font myModal-select">
+                               <option value="">请选择</option>
+
+                          </select>
+                    </div>
+                   <div class="form-group">
+                           <label >测试类型</label>
+                          <select  id="type"  class="form-control myModal-input myModal-header-font myModal-select">
+                               <option value="0">请选择</option>
+                               <option value="1">testsuite</option>
+                               <option value="2">testcass</option>
+                          </select>
+                   </div>
+                    <div class="form-group">
+                         <label>导入har2case命令转换后的json文件:</label>
+                         <input type="file" id="files" class="form-control myModal-input myModal-header-font" placeholder="基于httprunner-har2case导入json文件"/>
+                   </div>
+                  <div class="form-group">
+                         <label>测试描述:</label>
+                         <input  type="text" id="explain" class="form-control myModal-input myModal-header-font" placeholder="请输入测试描述" autocomplete="off">
+                   </div>
+                  <div class="form-group">
+                         <label>请求参数:</label>
+                         <textarea rows="" cols="" id="request" class="form-control myModal-input myModal-header-font myModal-textare"  placeholder="请输入测试请求:如{'url': 'http://127.0.0.1:2333/test', 'json': {'aaa': 'bbb'}, 'method': 'POST', 'headers': {'Content-Type': 'application/json'}, 'timeout': 10}"   autocomplete="off"></textarea>
+                  </div>
+                  <div class="form-group">
+                          <label>校验规则:</label>
+                         <input type="text" id="validate" class="form-control myModal-input myModal-header-font" placeholder="请输入校验规则:如[{'Equal': ['r.json()', 'request[\'json\']']}, {'Equal': ['r.status_code', '200']}]"  autocomplete="off">
+                  </div>
+                  <div class="form-group">
+                        <label>参数抽取:</label>
+                        <input type="text" id="extract" class="form-control myModal-input myModal-header-font" placeholder="请输入需要抽取的参数：如[{'token': 'r.json()[\'data\']'}]"  autocomplete="off">
+                  </div>
+               </form>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+				<button type="button" class="btn btn-primary" onclick="addCase()">提交</button>
+			    </div>
+		     </div><!-- /.modal-content -->
+	      </div><!-- /.modal -->
+        </div>
+        <table class="table table-bordered">
+
+            <caption></caption>
+            <thead>
+                <tr>
+                    <th>编号</th>
+                    <th>名称</th>
+                    <th>模块名称</th>
+                    <th>测试类型</th>
+                    <th>描述</th>
+                    <th>请求参数</th>
+                    <th>校验规则</th>
+                    <th>参数提取</th>
+                    <th>创建时间</th>
+                    <th>操作</th>
+                </tr>
+            </thead>
+            <tbody>
+
+            </tbody>
+        </table>
+         <!--分页栏-->
+        <div id="pagination">
+
+        </div>
+    </div>
+
+</div>
+
+
+<script>
+var inputElement = document.getElementById("files");
+     inputElement.addEventListener("change", handleFiles, false);
+     function handleFiles() {
+        var selectedFile = document.getElementById("files").files[0];//获取读取的File对象
+        var name = selectedFile.name;//读取选中文件的文件名
+        var size = selectedFile.size;//读取选中文件的大小
+        console.log("文件名:"+name+"大小："+size);
+        var reader = new FileReader();//这里是核心！！！读取操作就是由它完成的。
+         reader.readAsText(selectedFile);//读取文件的内容
+         reader.onload = function(){
+             console.log("读取结果：", this.result);//当读取完成之后会回调这个函数，然后此时文件的内容存储到了result中。直接操作即可。
+             console.log("读取结果转为JSON：");
+             let json = JSON.parse(this.result);
+             var requests="";
+             var name="";
+             var validate="";
+
+
+             for(var i  in json[0]){
+                 requests=JSON.stringify(json[0][i].request);
+                 validate=JSON.stringify(json[0][i].validate);
+             }
+
+             $("#explain").val(name);
+             $("#request").text(requests);
+             $("#validate").val(validate);
+
+         };
+
+     }
+
+
+    <!--分页功能START-->
+ $("#mySuccess").hide() //隐藏提示图层
+ $("#myDanger").hide()  //隐藏提示图层
+var totalNum=getnum();
+ layer.ready(function() {
+            var ii = layer.load(1, {
+            shade: [0.1,'#fff'] //0.1透明度的白色背景
+        });
+    //此处用setTimeout演示ajax的回调
+    setTimeout(function(){
+      layer.close(ii);
+    }, 3000);
+ });
+
+
+var totalPage = Math.ceil(totalNum/avageNum);
+var avageNum = 8;
+var currentPage = 1;
+getUserList(currentPage,avageNum);
+initPagination(totalPage,totalNum);
+function getnum(){
+     a="";
+     $.ajax({
+          url:'/querytcasscount',
+          method: 'GET',
+          async:false,
+          success:function (result) {
+              for(let i of result.data){
+                  a=i.casenum;
+              }
+          }
+
+
+     })
+
+  return a;
+
+}
+
+//总记录数
+
+//与后台交互获取数据，异步加载到页面上
+function getUserList(pageNum,pageSize){
+
+    currentPage = pageNum;
+    $.ajax({
+        url:"/querytcass",
+        method:"POST",
+        contentType:"application/json",
+        data:JSON.stringify({"pageNo":pageNum,"pageSize":pageSize}),
+        success:function(data){
+            $(".page2 .table tbody").html(" ");
+            if(data&&data.code == 200){
+                for(let i of data.data){
+                    let modulename = i.modulename;
+                    let createtime = i.createtime;
+                    let testtype= i.testtype;
+                    let explain = i.explain;
+                    let testid = i.testid;
+                    let testname = i.testname;
+                    let request = i.request;
+                    let validate = i.validate;
+                    let extract = i.extract;
+                    let casenum= i.casenum;
+                    let tableBtn = '<button class="btn btn-link btn-sm" onclick="run_testcass(this);">执行</button><button class="btn btn-link btn-sm" onclick="get_report(this);">结果</button><button class="btn btn-link btn-sm">修改</button><button class="btn btn-link btn-sm">删除</button>';
+                    let tr = $("<tr><td>"+testid+"</td><td>"+testname+"</td><td>"+modulename+"</td><td>"+testtype+"</td><td>"+explain+"</td><td>"+request+"</td><td>"+validate+"</td><td>"+extract+"</td><td>"+createtime+"</td><td>"+tableBtn+"</td><th hidden=\"hidden\">"+casenum+"</th></tr>")
+
+                    $(".page2 .table tbody").append(tr);
+                }
+            }
+            }
+
+    });
+}
+
+//初始化分页栏
+function initPagination(totalPage,totalNum) {
+    $('#pagination').html(" ");
+    $('#pagination').append(
+        '<ul class="pagination" style="display:inline;">' +
+        '<span style="float: right;">每页显示' +
+        '<select id="dataNum">' +
+        '<option value="1">1</option>' +
+        '<option value="2">2</option>' +
+        '<option value="3">3</option>' +
+        '<option value="4">4</option>' +
+        '<option value="5">5</option>' +
+        '<option value="6">6</option>' +
+        '<option value="7">7</option>' +
+        '<option value="8">8</option>' +
+        '<option value="9">9</option>' +
+        '<option value="10">10</option>' +
+        '</select>条记录,总共有' +totalPage + '页，总共' + totalNum + '条记录</span>' +
+        '</ul>'
+    )
+
+    $("#pagination ul").append(
+        '<li><a href="javascript:void(0);" id="prev">上一页</a>'
+    )
+    for (var i = 1; i <= totalPage; i++) {
+
+        $("#pagination ul").append(
+            '<li id="page'+i+'"><a href="javascript:void(0);"  onclick="getUserList(' + i + ',' + avageNum + ')">' + i + '</a>'
+        )
+    }
+    $("#pagination ul").append(
+        '<li><a href="javascript:void(0);"  id="next">下一页</a>'
+    )
+    $("select option[value=" + avageNum + "]").attr('selected', true)
+    $("#page1").addClass("active");
+
+}
+
+//很关键，因为执行initPagination方法时，将select删除再重新添加，所以需要先将select上的结点移除off
+//然后再绑定结点on，如果不这么做，会出现change事件只被触发一次。
+$(document).off('change','#dataNum').on('change','#dataNum',function(){
+    avageNum = $(this).children('option:selected').val();
+    currentPage = 1;
+    var totalPage = Math.ceil(totalNum/avageNum);
+    getUserList(currentPage,avageNum);
+    initPagination(totalPage,totalNum);
+});
+
+//设置分页栏点击时候的高亮
+$("#pagination").on("click","li",function(){
+    var aText = $(this).find('a').html();
+    checkA();
+    if (aText == "上一页"){
+        $(".pagination > li").removeClass("active");
+        $("#page"+(currentPage -1)).addClass("active");
+        getUserList(currentPage - 1,avageNum);
+        checkA();
+    }else if(aText == "下一页"){
+        $(".pagination > li").removeClass("active");
+        $("#page"+(currentPage + 1)).addClass("active");
+        getUserList(currentPage + 1,avageNum);
+        checkA();
+    }else{
+        $(".pagination > li").removeClass("active");
+        $(this).addClass("active");
+    }
+})
+
+//因为其他地方都需要用到这两句，所以封装出来
+//主要是用于检测当前页如果为首页，或者尾页时，上一页和下一页设置为不可选中状态
+function checkA() {
+    currentPage == 1 ? $("#prev").addClass("btn btn-default disabled") : $("#prev").removeClass("btn btn-default disabled");
+    currentPage == totalPage ? $("#next").addClass("btn btn-default disabled") : $("#next").removeClass("btn btn-default disabled");
+}
+<!--分页功能END-->
+ //执行用例js
+    function run_testcass(obj) {
+
+            id=$(obj).parents("tr").children("td").eq(0).text();//根据点击对象获取祖辈节点的属性
+            $.ajax({
+                type:"POST",
+                contentType:"application/json",
+                url:"/runtests",
+                data:JSON.stringify({"idlist":id}),
+                error:function (e) {
+                    $("#myDanger").show();
+                    $("#myDanger").text("用例未执行成功！");
+                    setTimeout(function(){
+                        $("#myDanger").hide();
+                  },3000);
+                },
+                success:function (result) {
+                  $("#mySuccess").show();
+                  $("#mySuccess").text(result["msg"]);
+                  setTimeout(function(){
+                        $("#mySuccess").hide();
+                  },3000);
+                }
+
+            });
+        };
+
+
+
+   //添加测试用例js
+    function addCase(){
+        var testname=$("#testname").val()
+        var moduleid=$("#moduleid").val()
+        console.log(moduleid);
+        var testtype=$("#type option:selected").text()
+        var explain=$("#explain").val()
+        var reqeust=$("#request").val()
+        var validate=$("#validate").val()
+        var extract=$("#extract").val()
+        $.ajax({
+            type:"POST",
+            contentType: "application/json",
+            url:"/addtcass",
+            data:JSON.stringify({
+                "testname":testname,
+                 "moduleid":moduleid,
+                 "testtype":testtype,
+                 "explain":explain,
+                 "request":reqeust,
+                 "validate":validate,
+                 "extract":extract
+            }),
+            error:function (e) {
+                    $("#myDanger").show();
+                    $("#myDanger").text("用例新增不成功");
+                    setTimeout(function(){
+                        $("#myDanger").hide();
+                  },3000);
+                   $('#myModal').modal('hide');
+            },
+
+            success:function (result) {
+                  $("#mySuccess").show();
+                  $("#mySuccess").text("用例新增成功！");
+                  setTimeout(function(){
+                        $("#mySuccess").hide();
+                  },3000);
+                  $('#myModal').modal('hide');
+
+
+            }
+
+        })
+
+    };
+
+ //
+   function get_report(obj){
+        id=$(obj).parents("tr").children("td").eq(0).text();//根据点击对象获取祖辈节点的属性
+            $.ajax({
+                type:"POST",
+                contentType:"application/json",
+                url:"/querycurrentreport",
+                data:JSON.stringify({"cassid":id}),
+                error:function (e) {
+
+                },
+                success:function (data) {
+                       for(let i of data.data){
+                             let cassid = i.cassid;
+                             let testname = i.testname;
+                             let result= i.result;
+                             let validate= i.validate;
+                             let status = i.status;
+                             let runtime = i.runtime;
+                             let createtime= i.createtime;
+                             var html = "<table border='1'cellspacing='0' cellpadding='5' width='100%'align='center'>" +
+                                   " <caption>测试详情:</catption>" +
+                                   " <tr  height='40' bgcolor='darkseagreen'>" +
+                                   " <td width='7%'>用例编号</td>" +
+                                   " <td width='7%'>用例名称</td>" +
+                                   "<td width='10%'>接口响应:</td>" +
+                                   " <td width='9%'>接口校验:</td>" +
+                                   "<td width='20%'>响应时间:</td>" +
+                                   "<td width='7%'>执行时间:</td>" +
+                                   "<td width='7%'>测试结果:</td>" +
+                                   " </tr>" +
+                                    " <tr>" +
+                                    " <td>" +cassid+"</td>"+ " <td>" +testname+"</td>"+ " <td>" +result+"</td>"+ " <td>" +validate+"</td>"+ " <td>" +runtime+"</td>"+ " <td>" +createtime+"</td>"+ " <td>" +status+"</td>"
+                                   " </tr>" +
+                                   "</table>"
+                             layer.open({
+                                   type: 1 //Page层类型
+                                    ,area: ['900px', '500px']
+                                    ,title: '测试报告'
+                                     ,shade: 0.6 //遮罩透明度
+                                    ,maxmin: true //允许全屏最小化
+                                     ,anim: 1 //0-6的动画形式，-1不开启
+                                    ,content: html
+});
+
+                       }
+
+
+
+                }
+        });
+   }
+   //模块id下拉列表动态加载js
+    $(function () {
+
+           $.ajax({
+                url:'/querymodule',
+                type:'GET',
+                success:function(res){
+                   if (res!=null) {
+                     for(let i of res.data){
+                          let moduleid = i.moduleid;
+                          $("#moduleid").append("<option value="+i.moduleid+">" + i.modules + "</option>");
+                     }
+                   }
+                }
+
+           })
+      });
+
+
+  $(function () {
+        $('#ff').bootstrapValidator({
+　　　　　　　　message: 'This value is not valid',
+            　feedbackIcons: {
+                　　　　　　　　valid: 'glyphicon glyphicon-ok',
+                　　　　　　　　invalid: 'glyphicon glyphicon-remove',
+                　　　　　　　　validating: 'glyphicon glyphicon-refresh'
+            　　　　　　　　   },
+            fields: {
+                testname: {
+                    validators: {
+                        notEmpty: {
+                            message: '用户名不能为空'
+                        }
+                    }
+                },
+
+            }
+        });
+    });
+
+
+</script>

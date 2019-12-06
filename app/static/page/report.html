@@ -1,0 +1,222 @@
+<div class="content page2" style="margin-top: 20px; font-style: '微软雅黑';">
+    <div class="reportManager table-responsive">
+    <table class="table1 table-bordered1" border="1" cellspacing="0" cellpadding="5" width="100%" align="center">
+       <thead>
+           <tr bgcolor="bisque" style="font-style: 30px" >
+              <td height="60" colspan="5">自动化测试报告:</td>
+           </tr>
+       </thead>
+       <tbody>
+
+       </tbody>
+</table>
+<p></p>
+<table class="table table-bordered" border="1" cellspacing="0" cellpadding="5" width="100%" align="center">
+     <thead>
+            <tr height="40" bgcolor="darkseagreen">
+              <td width="7%">用例编号</td>
+              <td width="7%">用例名称</td>
+              <td width="10%">接口响应:</td>
+              <td width="9%">接口校验:</td>
+              <td width="20%">响应时间:</td>
+              <td width="7%">执行时间:</td>
+              <td width="7%">测试结果:</td>
+              <td width="7%">操作</td>
+             </tr>
+            测试详情:
+     <thead>
+
+     <tbody>
+
+     </tbody>
+
+</table>
+<!--分页栏-->
+        <div id="pagination">
+
+        </div>
+    </div>
+</div>
+<script>
+ var totalNum=getnum();
+ layer.ready(function() {
+            var ii = layer.load(1, {
+            shade: [0.1,'#fff'] //0.1透明度的白色背景
+        });
+    //此处用setTimeout演示ajax的回调
+    setTimeout(function(){
+      layer.close(ii);
+    }, 3000);
+ });
+
+
+var avageNum = 8;
+var currentPage = 1;
+var totalPage = Math.ceil(totalNum/avageNum);
+getUserList(currentPage,avageNum);
+initPagination(totalPage,totalNum);
+function getnum(){
+     a="";
+     $.ajax({
+          url:'/queryreportcount',
+          method: 'GET',
+          async:false,
+          success:function (result) {
+              for(let i of result.data){
+                  a=i.reportnum;
+              }
+          }
+     })
+
+  return a;
+
+}
+
+//与后台交互获取数据，异步加载到页面上
+function getUserList(pageNum,pageSize){
+
+    currentPage = pageNum;
+    $.ajax({
+        url:"/queryreport",
+        method:"POST",
+        contentType:"application/json",
+        data:JSON.stringify({"pageNo":pageNum,"pageSize":pageSize}),
+        success:function(data){
+
+            $(".page2 .table tbody").html(" ");
+            if(data&&data.code == 200){
+                for(let i of data.data){
+                    let cassid = i.cassid;
+                    let testname = i.testname;
+                    let result= i.result;
+                    let validate= i.validate;
+                    let status = i.status;
+                    let runtime = i.runtime;
+                    let createtime= i.createtime;
+                    let reportnum= i.reportnum;
+                    let tableBtn = '<button class="btn btn-link btn-sm" <button class="btn btn-link btn-sm">删除</button>';
+                    let tr = $("<tr><td>"+cassid+"</td><td>"+testname+"</td><td>"+result+"</td><td>"+validate+"</td><td>"+runtime+"</td><td>"+createtime+"</td><td>"+status+"</td><td>"+tableBtn+"</td><th hidden=\"hidden\">"+reportnum+"</th></tr>");
+
+                    $(".page2 .table tbody").append(tr);
+                }
+            }
+            }
+
+    });
+}
+
+//初始化分页栏
+function initPagination(totalPage,totalNum) {
+    $('#pagination').html(" ");
+    $('#pagination').append(
+        '<ul class="pagination" style="display:inline;">' +
+        '<span style="float: right;">每页显示' +
+        '<select id="dataNum">' +
+        '<option value="1">1</option>' +
+        '<option value="2">2</option>' +
+        '<option value="3">3</option>' +
+        '<option value="4">4</option>' +
+        '<option value="5">5</option>' +
+        '<option value="6">6</option>' +
+        '<option value="7">7</option>' +
+        '<option value="8">8</option>' +
+        '<option value="9">9</option>' +
+        '<option value="10">10</option>' +
+        '</select>条记录,总共有' +totalPage + '页，总共' + totalNum + '条记录</span>' +
+        '</ul>'
+    )
+
+    $("#pagination ul").append(
+        '<li><a href="javascript:void(0);" id="prev">上一页</a>'
+    )
+    for (var i = 1; i <= totalPage; i++) {
+
+        $("#pagination ul").append(
+            '<li id="page'+i+'"><a href="javascript:void(0);"  onclick="getUserList(' + i + ',' + avageNum + ')">' + i + '</a>'
+        )
+    }
+    $("#pagination ul").append(
+        '<li><a href="javascript:void(0);"  id="next">下一页</a>'
+    )
+    $("select option[value=" + avageNum + "]").attr('selected', true)
+    $("#page1").addClass("active");
+
+}
+
+//很关键，因为执行initPagination方法时，将select删除再重新添加，所以需要先将select上的结点移除off
+//然后再绑定结点on，如果不这么做，会出现change事件只被触发一次。
+$(document).off('change','#dataNum').on('change','#dataNum',function(){
+    avageNum = $(this).children('option:selected').val();
+    currentPage = 1;
+    var totalPage = Math.ceil(totalNum/avageNum);
+    getUserList(currentPage,avageNum);
+    initPagination(totalPage,totalNum);
+});
+
+//设置分页栏点击时候的高亮
+$("#pagination").on("click","li",function(){
+    var aText = $(this).find('a').html();
+    checkA();
+    if (aText == "上一页"){
+        $(".pagination > li").removeClass("active");
+        $("#page"+(currentPage -1)).addClass("active");
+        getUserList(currentPage - 1,avageNum);
+        checkA();
+    }else if(aText == "下一页"){
+        $(".pagination > li").removeClass("active");
+        $("#page"+(currentPage + 1)).addClass("active");
+        getUserList(currentPage + 1,avageNum);
+        checkA();
+    }else{
+        $(".pagination > li").removeClass("active");
+        $(this).addClass("active");
+    }
+})
+
+//因为其他地方都需要用到这两句，所以封装出来
+//主要是用于检测当前页如果为首页，或者尾页时，上一页和下一页设置为不可选中状态
+function checkA() {
+    currentPage == 1 ? $("#prev").addClass("btn btn-default disabled") : $("#prev").removeClass("btn btn-default disabled");
+    currentPage == totalPage ? $("#next").addClass("btn btn-default disabled") : $("#next").removeClass("btn btn-default disabled");
+}
+
+
+(function page2Init(){
+        $.get("/queryresultCount",function(data){
+
+           /**
+            if(data&&data.code == 200){
+                for(let i of data.data){
+                    let status = i.status;
+                    let nums = i.nums;
+                    let tr = $("<tr><td><i style='color:red'>"+status+"</i></td><td><u style='color:green'>"+nums+"</u> 条</td></tr>")
+
+                    $(".page2 .table1 tbody").append(tr);
+                }
+            }**/
+
+            if(data&&data.code==200){
+                 var content=data.data;
+                 for(var i=0;i<content.length;i++){
+                     if(content.length==1){
+                          var tr = $("<tr><td>"+content[0].status+':'+content[0].nums+" 条</td></tr>")
+                     }else if(content.length==2){
+                         var tr = $("<tr><td>"+content[0].status+':'+content[0].nums+" 条</td><td>"+content[1].status+':'+content[1].nums+" 条</td></tr>")
+                     }else {
+                         var tr = $("<tr><td>"+content[0].status+':'+content[0].nums+" 条</td><td>"+content[1].status+':'+content[1].nums+" 条</td><td>"+content[2].status+':'+content[2].nums+" 条</td></tr>")
+                     }
+
+
+                 }
+                 $(".page2 .table1 tbody").append(tr);
+            }
+
+
+
+
+        });
+
+
+    })();
+</script>
+

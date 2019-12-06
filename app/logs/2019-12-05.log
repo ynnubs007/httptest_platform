@@ -1,0 +1,21 @@
+[2019-12-05 10:34:07] [ERROR]: sql语句[insert into t_testcass             (`moduleid`, `testname`, `testtype`, `explain`,             `request`, `validate`, `extract`)             values('1','','请选择','','','','');            ]执行失败,错误信息为 --> (3140, 'Invalid JSON text: "The document is empty." at position 0 in value for column \'t_testcass.request\'.')
+[2019-12-05 10:55:58] [ERROR]: sql语句[insert into t_testcass             (`moduleid`, `testname`, `testtype`, `explain`,             `request`, `validate`, `extract`)             values('1','','请选择','','','','');            ]执行失败,错误信息为 --> (3140, 'Invalid JSON text: "The document is empty." at position 0 in value for column \'t_testcass.request\'.')
+[2019-12-05 11:05:43] [ERROR]: sql语句[insert into t_testcass             (`moduleid`, `testname`, `testtype`, `explain`,             `request`, `validate`, `extract`)             values('','','请选择','','','','');            ]执行失败,错误信息为 --> (1366, "Incorrect integer value: '' for column 'moduleid' at row 1")
+[2019-12-05 11:10:22] [ERROR]: sql语句[insert into t_testcass             (`moduleid`, `testname`, `testtype`, `explain`,             `request`, `validate`, `extract`)             values('1','','testsuite','"testcase description"','','','');            ]执行失败,错误信息为 --> (3140, 'Invalid JSON text: "The document is empty." at position 0 in value for column \'t_testcass.request\'.')
+[2019-12-05 11:11:42] [ERROR]: sql语句[insert into t_testcass             (`moduleid`, `testname`, `testtype`, `explain`,             `request`, `validate`, `extract`)             values('1','','testsuite','"testcase description"','{"url":"http://localhost:2333/login","method":"POST","headers":{"User-Agent":"HTTPie/1.0.3","Content-Type":"application/json"},"json":{"username":"admin","password":"123456"}}','[{"eq":["status_code",200]},{"eq":["headers.Content-Type","application/json"]},{"eq":["content.code",200]},{"eq":["content.data","sjdh34gsalked23nlsakn45dudaj"]},{"eq":["content.msg","登陆成功"]}]','');            ]执行失败,错误信息为 --> (3140, 'Invalid JSON text: "The document is empty." at position 0 in value for column \'t_testcass.extract\'.')
+[2019-12-05 11:15:12] [INFO]: 开始执行测试用例[test接口测试用例]
+[2019-12-05 11:15:12] [INFO]: 接口请求地址为 --> http://127.0.0.1:2333/test
+[2019-12-05 11:15:12] [INFO]: 接口请求方法为 --> POST
+[2019-12-05 11:15:12] [INFO]: 接口请求header --> {'Content-Type': 'application/json'}
+[2019-12-05 11:15:12] [INFO]: 接口请求数据为 --> {'aaa': 'bbb'}
+[2019-12-05 11:15:12] [INFO]: 接口响应时间为 --> 0.00341s
+[2019-12-05 11:15:12] [INFO]: 接口响应状态为 --> 200
+[2019-12-05 11:15:12] [INFO]: 接口响应内容为 --> {
+  "aaa": "bbb"
+}
+
+[2019-12-05 11:15:12] [INFO]: 测试用例[test接口测试用例]检查点执行成功,检查点信息为 --> r.json()==request["json"]
+[2019-12-05 11:15:12] [INFO]: 测试用例[test接口测试用例]检查点执行成功,检查点信息为 --> r.status_code==200
+[2019-12-05 11:15:12] [INFO]: ******************************************************************************************
+[2019-12-05 11:15:12] [INFO]: 共计[1]条测试用例执行完成！
+[2019-12-05 11:15:12] [INFO]: ******************************************************************************************

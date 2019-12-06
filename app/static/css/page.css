@@ -1,0 +1,44 @@
+.content{
+    height: auto;
+    width: 100%;
+}
+.content .panel-primary{
+    height: 100%;
+    color: #777;
+}
+.topBox{
+    padding: 10px;
+    margin-left: 10px;
+    margin-right: 10px;
+    margin-top: 10px;
+    min-height: 385px;
+    min-width: 1020px;
+    width: auto;
+}
+.bottomBox{
+    padding: 10px;
+    margin-left: 10px;
+    margin-right: 10px;
+    margin-top: 10px;
+    min-height: 385px;
+    min-width: 1020px;
+    width: auto;
+}
+.box1{
+    float: left;
+    margin-right: 10px;
+    height: 385px;
+    width: 49%;
+}
+.box2{
+    float: left;
+    margin-left: 10px;
+    height: 385px;
+    width: 49%;
+}
+.chartBody{
+    background: #FFF;
+}
+.projectManager{
+    background: #FFF;
+}
